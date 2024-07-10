@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Top Rated Movies</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .navbar a {
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: #000;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div class="navbar">
+        <a href="/index">主页</a>
+        <a href="#">最新上映</a>
+        <a href="#">热门电影</a>
+        <a href="/movies/top-rated-view">电影排行</a>
+        <a href="#">个人中心</a>
+    </div>
+
+    <div class="container">
+        <h1 style="text-align: center;">Top Rated Movies</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>排名</th>
+                <th>电影名称</th>
+                <th>类型</th>
+                <th>导演</th>
+                <th>产地</th>
+                <th>主演</th>
+                <th>评分</th>
+                <th>播放量</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="movie, iterStat : ${movies}" style="cursor: pointer;" onclick="window.location.href='/movies/details/' + ${movie.id}">
+                <td th:text="${iterStat.index + 1}">1</td>
+                <td th:text="${movie.moviename}">电影名称</td>
+                <td th:text="${movie.movieclass}">类型</td>
+                <td th:text="${movie.director}">导演</td>
+                <td th:text="${movie.region}">产地</td>
+                <td th:text="${movie.actor}">主演</td>
+                <td th:text="${movie.grade}">评分</td>
+                <td th:text="${movie.view}">播放量</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

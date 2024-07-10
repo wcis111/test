@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>搜索结果</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h2 style="text-align: center;font-size: 26px">搜索结果</h2>
+<div class="searchResults">
+  <div class="movie-info" th:each="movie : ${movies}">
+    <img th:src="@{${movie.img}}" alt="电影海报">
+    <h2 th:text="${movie.moviename}"></h2>
+    <p style="font-size: 20px;font-weight: 800"th:text="'导演: ' + ${movie.director}"></p >
+    <p style="font-size: 20px;font-weight: 800"th:text="'主演: ' + ${movie.actor}"></p >
+    <p style="font-size: 18px;font-weight: 600"th:text="${movie.introduce}"></p >
+    <p style="color: gold;font-weight: 800" th:text="'评分: ' + ${movie.grade}"></p >
+  </div>
+</div>
+返回主页
+</body>
+</html>

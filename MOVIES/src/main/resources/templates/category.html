@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>电影分类展示</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div style="display: flex;justify-content: center;width: 85%;height: auto;flex-direction: column;">
+  <div>
+    <h1 style="text-align: center;font-size: 26px">电影分类展示</h1>
+  </div>
+  <div style="text-align: center">
+    <form method="get" action="/category">
+      <input type="text" name="movename" placeholder="搜索电影">
+      <select name="movieClass" style="font-size: 20px;">
+        <option value="">所有类别</option>
+        <option value="动作">动作</option>
+        <option value="喜剧">喜剧</option>
+        <option value="爱情">爱情</option>
+        <option value="悬疑">悬疑</option>
+        <option value="音乐">音乐</option>
+        <option value="家庭">家庭</option>
+        <option value="古装">古装</option>
+        <option value="犯罪">犯罪</option>
+        <option value="冒险">冒险</option>
+        <!-- 添加更多电影类别 -->
+      </select>
+      <select name="region"style="font-size: 20px;">
+        <option value="">所有地区</option>
+        <option value="美国">美国</option>
+        <option value="中国">中国</option>
+        <option value="日本">日本</option>
+        <option value="韩国">韩国</option>
+        <!-- 添加更多地区 -->
+      </select>
+      <select name="sort"style="font-size: 20px;">
+        <option value="view">观看次数</option>
+        <option value="grade">评分</option>
+      </select>
+      <select name="order"style="font-size: 20px;">
+        <option value="asc">升序</option>
+        <option value="desc">降序</option>
+      </select>
+      <button type="submit"style="font-size: 20px;">搜索</button>
+    </form>
+  </div>
+  <div style="margin-left: 10%;">
+    <ul style="list-style: none;display: block;flex-wrap: wrap;">
+      <li style="width: 25%;float: left;text-decoration: none;display: flex;justify-content: center;align-content: center" th:each="movie : ${movies}">
+        <img th:src="${movie.img}" alt="电影图片" style="width: 240px;height: auto">
+        <div style="text-align: center">
+          <h2 th:text="${movie.moviename}">电影名字</h2>
+          <p>评分: <span th:text="${movie.grade}">0.0</span></p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div style="text-align: center;font-size: 20px;margin-top: 40px">
+    <span th:text="'当前页：' + ${currentPage}"></span>
+    <span th:text="'共' + ${pageCount} + '页'"></span>
+    <div>
+      <a th:if="${currentPage > 1}" th:href="@{/category(pageNo=${currentPage - 1}, movename=${param.movename}, movieClass=${param.movieClass}, region=${param.region}, sort=${param.sort}, order=${param.order})}">上一页</a>
+      <a th:if="${currentPage < pageCount}" th:href="@{/category(pageNo=${currentPage + 1}, movename=${param.movename}, movieClass=${param.movieClass}, region=${param.region}, sort=${param.sort}, order=${param.order})}">下一页</a>
+    </div>
+  </div>
+  <a href="index" style="display: block; text-align: center;margin-top: 80px;font-size: 22px;text-decoration: none;">返回主页</a>
+</div>
+</body>
+</html>

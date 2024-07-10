@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<title>Home</title>
+	<link  rel="stylesheet" type="text/css" href="css/style.css">
+
+<script src="/js/script.js"></script>
+</head>
+<body>
+<div id="main">
+
+	<div class="overlay" id="overlay"></div>
+	<div class="container">
+		<div class="top">
+			<img id="logo" src="/img/logo.jpg"/>
+			<div class="top1">
+				<ul class="topul">
+					<li class="topli">APP</li>
+					<li class="topli">最新上映</li>
+					<li class="topli"><a href="category" style="text-decoration: none;color: inherit;">分类展示</a></li>
+					<li class="topli"><a href="/movies/top-rated-view" style="text-decoration: none;color: inherit;">电影排行</a></li>
+					<li class="topli">个人中心</li>
+				</ul>
+			</div>
+		</div>
+		<div class="top2">
+			<form id="searchForm" action="/search" method="get">
+				<input class="search" name="keyword" placeholder="搜索相关导演或主演"/>
+				<img id="searchimg" src="/img/search.png" width="90px" onclick="document.getElementById('searchForm').submit();" style="cursor: pointer"/>
+			</form>
+		</div>
+		<div class="top3">
+			<img id="login" src="/img/login.png"/>
+			<div style="margin-top: 17%;">
+				<a style="color: cadetblue;font-weight: 700;font-size: 20px;cursor: pointer;" href="login">登录</a>
+			</div>
+				<div style="margin-top: 20px;margin-left: 40px;">
+					<a style="color: cadetblue; font-weight: 700; font-size: 20px; cursor: pointer;" href="logout">退出登录</a>
+				</div>
+		</div>
+	</div>
+	<div class="login-page" id="loginPage">
+		<div class="lg_top">
+			<h2 style="font-size: 30px;">用户登录</h2>
+			<span class="lg_close" onclick="closeLoginPage()">
+						X
+					</span>
+		</div>
+		<div class="lg_content">
+			<div class="h1-login">
+				<div class="h1-wrap-login">
+					<form class="h1-form" method="post" id="fm" action="/doLogin">
+						<div class="h1-group">
+							<label>账号</label>
+							<input type="text" name="userName11" class="hl-name" placeholder="请输入账号或邮箱">
+						</div>
+						<div class="h1-group">
+							<label>密码</label>
+							<input type="password" name="pwd11" class="hl-pwd" placeholder="输入您的登录密码">
+						</div>
+						<input type="submit" class="hl-submit" value="立即登录">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</script>
+	<div class="lunbo">
+		<div id="lunbo0" style="background-image: url('/img/lunbo1.jpg'); display: block;">
+			<img src="/img/lunbo1.jpg" style="max-width: 100%; height: auto;">
+		</div>
+		<div id="lunbo1" style="background-image: url('/img/lunbo2.jpg'); display: none;">
+			<img src="/img/lunbo2.jpg" style="max-width: 100%; height: auto;">
+		</div>
+		<div id="lunbo2" style="background-image: url('/img/lunbo3.jpeg'); display: none;">
+			<img src="/img/lunbo3.jpeg" style="max-width: 100%; height: auto;">
+		</div>
+		<div id="lunbo3" style="background-image: url('/img/lunbo4.jpg'); display: none;">
+			<img src="/img/lunbo4.jpg" style="max-width: 100%; height: auto;">
+		</div>
+		<div id="lunbo4" style="background-image: url('/img/lunbo5.png'); display: none;">
+			<img src="/img/lunbo5.png" style="max-width: 100%; height: auto;">
+		</div>
+	</div>
+	<div class="pagination">
+		<div class="title">分页展示</div>
+		<div class="pg1" th:each="movie:${movies}">
+			<a href="/movies/movieDetail">
+			<div class="pg11">
+				<img class="movie" th:src="@{${movie.img}}"/>
+			</div>
+			<div class="pg12" th:text="${movie.moviename}"></div>
+			</a>
+		</div>
+	</div>
+	<div class="fenye">
+		<br/><br/>
+		<span><a th:href="@{/index(pageNo=1)}">首页</a></span>&nbsp;&nbsp;
+		<span th:switch="${currentPage}">
+					<a th:case="1" th:href="@{/index(pageNo=${currentPage})}">上一页</a>&nbsp;&nbsp;
+					<a th:case="*" th:href="@{/index(pageNo=${currentPage - 1})}">上一页</a>
+				</span>
+		<p th:text="${pageNo}"></p >
+		<span th:if="${currentPage}==${pageCount}">
+				<a th:href="@{/index(pageNo=${pageCount})}">下一页</a>&nbsp;&nbsp;
+			</span>
+		<span th:unless="${currentPage}==${pageCount}">
+				<a th:href="@{/index(pageNo=${currentPage + 1})}">下一页</a>
+			</span>
+
+		<span>&nbsp;&nbsp;<a th:href="@{/index(pageNo=${pageCount})}">尾页</a></span>
+
+		<br/><br/>
+	</div>
+</div>
+<tr>
+	<td>
+		<p th:if="${session.userLogin}">
+			<a href="/index/logOut" style="font-size:x-small;text-decoration:none;">退出</a>
+			<a href="/index/toRegister" style="font-size:x-small;text-decoration:none;">注册</a>&nbsp;&nbsp;
+			<a href="/admin/toAdminLogin" style="font-size:x-small;text-decoration:none;">后台登录</a>&nbsp;&nbsp;
+		</p>
+		<p th:unless="${session.userLogin}">
+        <span id="loginbar2">
+          <a href="/index/toLogin" style="font-size:x-small;text-decoration:none;">登录</a>&nbsp;</span>
+			<a href="/index/toRegister" style="font-size:x-small;text-decoration:none;">注册</a>&nbsp;&nbsp;
+			<a href="/admin/toAdminLogin" style="font-size:x-small;text-decoration:none;">后台登录</a>&nbsp;&nbsp;
+		</p>
+	</td>
+</body>

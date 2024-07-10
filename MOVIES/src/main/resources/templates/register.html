@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Register</title>
+  <!-- Link to Bootstrap CSS for styling -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- Link to Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    /* Styling to match the appearance of the second form */
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      margin-top: 50px;
+      text-align: center;
+    }
+    .heading {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .fa {
+      margin-right: 10px;
+    }
+    .btn-default {
+      background-color: #337ab7;
+      color: white;
+      border-radius: 0;
+      border: none;
+      padding: 10px 20px;
+    }
+    .btn-default:hover {
+      background-color: #286090;
+    }
+    .create_account {
+      color: #337ab7;
+      text-decoration: none;
+      margin-left: 10px;
+    }
+    .create_account:hover {
+      text-decoration: underline;
+    }
+    .form-bg {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+      <div class="demo form-bg">
+        <form action="/doRegister" method="post" class="form-horizontal">
+          <div class="heading">注册页面</div>
+          <div class="form-group">
+            <i class="fa fa-user"></i><input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
+          </div>
+          <div class="form-group">
+            <i class="fa fa-lock"></i><input type="password" id="pwd" name="pwd" class="form-control" placeholder="Password" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-default"><i class="fa fa-arrow-right"></i></button>
+            <span><a href="" class="create_account">注册</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
